@@ -12,6 +12,13 @@
 module ILO_SDK
   # Contains helper methods for Firmware Update actions
   module FirmwareUpdateHelper
+    # Get the Firmware Inventory
+    # @raise [RuntimeError] if the request failed
+    # @return [Hash] Firmware Inventory
+    def get_fw_inventory
+      response_handler(rest_get('/redfish/v1/Systems/1/FirmWareInventory/'))
+    end
+
     # Get the Firmware Version
     # @raise [RuntimeError] if the request failed
     # @return [String] fw_version
