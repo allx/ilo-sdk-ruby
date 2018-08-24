@@ -24,11 +24,6 @@ Style/FileName:
   Exclude:
     - 'lib/ilo-sdk.rb'
 
-Style/AlignParameters:
-  Exclude:
-    - 'lib/ilo-sdk/cli.rb'
-
-
 Style/AccessorMethodName:
   Enabled: false
 

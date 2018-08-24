@@ -12,7 +12,6 @@
 require_relative 'ilo-sdk/version'
 require_relative 'ilo-sdk/client'
 require_relative 'ilo-sdk/exceptions'
-require_relative 'ilo-sdk/cli'
 
 # Module for interracting with the HPE iLO API
 module ILO_SDK
