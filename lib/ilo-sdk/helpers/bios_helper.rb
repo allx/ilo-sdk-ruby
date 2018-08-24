@@ -12,6 +12,15 @@
 module ILO_SDK
   # Contains helper methods for Bios actions
   module BiosHelper
+
+    # Get BIOS boot information
+    # @param system_id [Integer] ID of the system
+    # @raise [RuntimeError] if the request failed
+    # @return [Hash] BIOS boot settings
+    def get_bios_boot(system_id = 1)
+      response_handler(rest_get("/redfish/v1/Systems/#{system_id}/bios/Boot/"))
+    end
+
     # Get all the BIOS settings
     # @param system_id [Integer, String] ID of the system
     # @raise [RuntimeError] if the request failed
