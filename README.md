@@ -1,3 +1,5 @@
+Fork from https://github.com/HewlettPackard/ilo-sdk-ruby. Removed CLI and dependencies.
+
 # Ruby SDK for HPE iLO
 
 [![Gem Version](https://badge.fury.io/rb/ilo-sdk.svg)](https://badge.fury.io/rb/ilo-sdk)
