@@ -17,7 +17,13 @@ module ILO_SDK
     # @param ethernet_interface [Integer, String] ID of the EthernetInterface
     # @raise [RuntimeError] if the request failed
     # @return [Hash] EthernetInterface settings
-    def get_ilo_ethernet_interface(manager_id: 1, ethernet_interface: 1)
+
+    #def get_ilo_ethernet_interface(manager_id: 1, ethernet_interface: 1)
+    def get_ilo_ethernet_interface(options = {})
+
+      manager_id = options.fetch(:manager_id, 1)
+      ethernet_interface = options.fetch(:ethernet_interface, 1)
+
       response_handler(rest_get("/redfish/v1/Managers/#{manager_id}/EthernetInterfaces/#{ethernet_interface}/"))
     end
 
@@ -26,7 +32,13 @@ module ILO_SDK
     # @param ethernet_interface [Integer, String] ID of the EthernetInterface
     # @raise [RuntimeError] if the request failed
     # @return true
-    def set_ilo_ipv4_dhcp(manager_id: 1, ethernet_interface: 1)
+
+    #def set_ilo_ipv4_dhcp(manager_id: 1, ethernet_interface: 1)
+    def set_ilo_ipv4_dhcp(options = {})
+
+      manager_id = options.fetch(:manager_id, 1)
+      ethernet_interface = options.fetch(:ethernet_interface, 1)
+
       new_action = {
         'Oem' => {
           'Hp' => {
@@ -55,7 +67,16 @@ module ILO_SDK
     # @param ethernet_interface [Integer, String] ID of the EthernetInterface
     # @raise [RuntimeError] if the request failed
     # @return true
-    def set_ilo_ipv4_static(ip:, netmask:, gateway: '0.0.0.0', manager_id: 1, ethernet_interface: 1)
+
+    #def set_ilo_ipv4_static(ip:, netmask:, gateway: '0.0.0.0', manager_id: 1, ethernet_interface: 1)
+    def set_ilo_ipv4_static(options = {})
+
+      ip = options.fetch(:ip);
+      netmask = options.fetch(:netmask);
+      gateway = options.fetch(:gateway, '0.0.0.0');
+      manager_id = options.fetch(:manager_id, 1)
+      ethernet_interface = options.fetch(:ethernet_interface, 1)
+
       new_action = {
         'Oem' => { 'Hp' => { 'DHCPv4' => { 'Enabled' => false } } },
         'IPv4Addresses' => [
@@ -73,7 +94,14 @@ module ILO_SDK
     # @param ethernet_interface [Integer, String] ID of the EthernetInterface
     # @raise [RuntimeError] if the request failed
     # @return true
-    def set_ilo_ipv4_dns_servers(dns_servers:, manager_id: 1, ethernet_interface: 1)
+
+    #def set_ilo_ipv4_dns_servers(dns_servers:, manager_id: 1, ethernet_interface: 1)
+    def set_ilo_ipv4_dns_servers(options = {})
+
+      dns_servers = options.fetch(:dns_servers)
+      manager_id = options.fetch(:manager_id, 1)
+      ethernet_interface = options.fetch(:ethernet_interface, 1)
+
       new_action = {
         'Oem' => {
           'Hp' => {
@@ -94,7 +122,15 @@ module ILO_SDK
     # @param ethernet_interface [Integer, String] ID of the EthernetInterface
     # @raise [RuntimeError] if the request failed
     # @return true
-    def set_ilo_hostname(hostname:, domain_name: nil, manager_id: 1, ethernet_interface: 1)
+
+    #def set_ilo_hostname(hostname:, domain_name: nil, manager_id: 1, ethernet_interface: 1)
+    def set_ilo_hostname(options = {})
+
+      hostname = options.fetch(:hostname)
+      domain_name = options.fetch(:domain_name, nil)
+      manager_id = options.fetch(:manager_id, 1)
+      ethernet_interface = options.fetch(:ethernet_interface, 1)
+
       new_action = { 'Oem' => { 'Hp' => { 'HostName' => hostname } } }
       new_action['Oem']['Hp'].merge!('DHCPv4' => {}, 'DHCPv6' => {}) if domain_name
       new_action['Oem']['Hp']['DHCPv4']['UseDomainName'] = false if domain_name
