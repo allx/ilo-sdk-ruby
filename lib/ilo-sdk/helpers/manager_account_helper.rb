@@ -12,17 +12,30 @@
 module ILO_SDK
   # Contains helper methods for Manager Account actions
   module ManagerAccountHelper
-    # Get the Privileges for a user
-    # @param [String, Symbol] username
+    # Get the Privilege(s)
+    # @param [String, Symbol] username - return all if no username provided
     # @raise [RuntimeError] if the request failed
     # @return [Hash] privileges
-    def get_account_privileges(username)
+    def get_account_privileges(username = nil)
       response = rest_get('/redfish/v1/AccountService/Accounts/')
       accounts = response_handler(response)['Items']
+      privileges = Array.new
       accounts.each do |account|
-        if account['Oem']['Hp']['LoginName'] == username
-          return account['Oem']['Hp']['Privileges']
+        if username
+          if account['Oem']['Hp']['LoginName'] == username
+            return account['Oem']['Hp']['Privileges']
+          end
+        else
+          privileges.push({
+            "LoginName" => account['Oem']['Hp']['LoginName'],
+            "Privileges" => account['Oem']['Hp']['Privileges']
+          })
         end
+      end
+      if username
+        return nil
+      else
+        return privileges
       end
     end
 
