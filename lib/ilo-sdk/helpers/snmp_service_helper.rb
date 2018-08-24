@@ -28,6 +28,14 @@ module ILO_SDK
       response_handler(response)['AlertsEnabled']
     end
 
+    # Get the SNMP Alert Destinations
+    # @raise [RuntimeError] if the request failed
+    # @return [String[]] snmp_alert_destinations
+    def get_snmp_alert_destinations
+      response = rest_get('/redfish/v1/Managers/1/SnmpService/')
+      response_handler(response)['AlertDestinations']
+    end
+
     # Set the SNMP Mode and Alerts Enabled value
     # @param [String, Symbol] snmp_mode
     # @param [Boolean] snmp_alerts
