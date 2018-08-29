@@ -12,6 +12,12 @@
 module ILO_SDK
   # Contains helper methods for Manager Network Protocol actions
   module ManagerNetworkProtocolHelper
+
+    def get_network_service
+      response = rest_get('/redfish/v1/Managers/1/NetworkService/')
+      response_handler(response)
+    end
+
     # Get the Session Timeout Minutes
     # @raise [RuntimeError] if the request failed
     # @return [Fixnum] timeout
